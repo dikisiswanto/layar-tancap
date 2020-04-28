@@ -1,0 +1,38 @@
+.gallery {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	overflow: hidden;
+	overflow-x: scroll;
+	white-space: nowrap;
+	scroll-snap-type: x mandatory;
+	scroll-padding: 50px;
+	-ms-overflow-style: none;
+}
+
+.gallery::-webkit-scrollbar {
+	display: none;
+}
+.gallery .pad {
+	flex-shrink: 0;
+	width: 50px;
+}
+
+@media only screen and (max-width: 1024px) {
+	.gallery {
+			scroll-padding: 30px;
+	}
+	.gallery .pad {
+			width: 30px;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	.gallery {
+			scroll-padding: 20px;
+	}
+	.gallery .pad {
+			width: 20px;
+	}
+}
