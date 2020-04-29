@@ -7,14 +7,17 @@
 	flex-shrink: 0;
 	box-sizing: border-box;
 }
-.poster .image, .poster .default-poster {
+
+.poster .image,
+.poster .default-poster {
 	position: relative;
 	width: 100%;
 	height: 0;
-	padding-top: 150%;    /* TIPS: This is your aspect ratio */
+	padding-top: 150%;
 	overflow: hidden;
 	background-color: #202124;
 }
+
 .poster .default-poster img {
 	position: absolute;
 	top: 50%;
@@ -25,6 +28,7 @@
 	height: 40px;
 	transition: transform 0.5s ease;
 }
+
 .poster .image img {
 	position: absolute;
 	top: 0;
@@ -36,18 +40,24 @@
 	transition: transform 0.5s ease;
 }
 
-.poster .image:hover img, .poster .default-poster:hover img {
+.poster .image:hover img,
+.poster .default-poster:hover img {
 	transform: scale(1.1);
 }
+
 .poster .title {
-	margin: 10px 0;
+	margin: 12px 0;
 	overflow: hidden;
 	white-space: nowrap;
 	text-overflow: ellipsis;
+	font-size: 1.0em;
 }
+
 .poster .year {
 	color: #80868B;
+	margin: 0;
 	margin-left: 20px;
+	font-size: 1.0em;
 }
 
 .explore {
@@ -65,59 +75,93 @@
 	margin-bottom: 40px;
 }
 
+/* rating */
+.rating {
+	display: inline-flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.rating img {
+	width: 14px;
+	height: 14px;
+	margin-right: 5px;
+}
+
+.rating div {
+	color: #FFE170;
+	font-weight: 700;
+}
+
+.chorizontal {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+
 /* Shimmer */
 .shimmer {
-	background-image: linear-gradient(to right, #202124 0%, #252525 20%, #262626 40%, #202124 100%);
-  background-repeat: no-repeat;
-  background-size: cover;
-  animation-duration: 1s;
-  animation-fill-mode: forwards;
-  animation-iteration-count: infinite;
-  animation-name: placeholderShimmer;
-  animation-timing-function: linear;
+	background-color: #202124;
+	background-image: linear-gradient(to right, #202124 0%, #252424 20%, #252424 40%, #202124 100%);
+	background-repeat: no-repeat;
+	background-size: cover;
+	animation-duration: 1s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-name: placeholderShimmer;
+	animation-timing-function: linear;
 }
+
 @keyframes placeholderShimmer {
-  0% {
-    background-position: -468px 0;
-  }
+	0% {
+		background-position: -468px 0;
+	}
 
-  100% {
-    background-position: 468px 0;
-  }
+	100% {
+		background-position: 468px 0;
+	}
 }
 
 
-@media only screen and (max-width: 1500px){
-.poster-grid {
-	width: 20%;
-}
-}
-@media only screen and (max-width: 1024px){
-	.poster {
-			width: 200px;
-	}
-	.explore {
-			width: 200px;
-			height: 300px;
-	}
-.poster-grid {
-	width: 25%;
-}
-}
-@media only screen and (max-width: 640px){
-.poster-grid {
-	width: 33.333333%;
-}
-}
-@media only screen and (max-width: 480px){
-	.poster {
-			width: 180px;
-	}
-	.explore {
-			width: 180px;
-			height: 270px;
-	}
+@media only screen and (max-width: 1500px) {
 	.poster-grid {
-	width: 50%;
+		width: 20%;
+	}
 }
+
+@media only screen and (max-width: 1024px) {
+	.poster {
+		width: 200px;
+	}
+
+	.explore {
+		width: 200px;
+		height: 300px;
+	}
+
+	.poster-grid {
+		width: 25%;
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	.poster-grid {
+		width: 33.333333%;
+	}
+}
+
+@media only screen and (max-width: 480px) {
+	.poster {
+		width: 180px;
+	}
+
+	.explore {
+		width: 180px;
+		height: 270px;
+	}
+
+	.poster-grid {
+		width: 50%;
+	}
 }

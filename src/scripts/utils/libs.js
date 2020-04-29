@@ -54,6 +54,35 @@ export function getYear(date) {
 	return moment(date).year();
 }
 
+export function now() {
+	return moment().toDate();
+}
+
+export function oneMonthBefore() {
+	return moment().subtract(1, 'months');
+}
+
+export function formatDate(date) {
+	if (date !== null) {
+			return moment(date).format('YYYY-MM-DD');
+	}
+	return '';
+}
+
+function formatFullDate(date){
+	if (date !== null) {
+			return moment(date).format('D MMMM YYYY');
+	}
+	return '';
+}
+
+export default function putDecimal(num){
+	if(num % 1 === 0){
+			return `${num.toString()}.0`;
+	}
+	return num
+}
+
 export function filterMovies(rawData) {
 	let filteredData = [];
 	for (let data of rawData) {
@@ -66,25 +95,6 @@ export function filterMovies(rawData) {
 			releaseYear: getYear(data.release_date)
 		}
 		filteredData.push(fd);
-	}
-	return filteredData;
-}
-
-export function filterPersons(rawData) {
-	let filteredData = [];
-	for (let data of rawData) {
-			
-			if (data.profile_path === null) {
-					continue;
-			}
-
-			let fd = {
-					mediaType: 'person',
-					id: data.id,
-					name: data.name,
-					poster: getProfileURL(data.profile_path),
-			}
-			filteredData.push(fd);
 	}
 	return filteredData;
 }

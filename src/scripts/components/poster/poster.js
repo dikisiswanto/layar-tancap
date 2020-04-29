@@ -1,5 +1,9 @@
 import image from "../../../images/icon/image.svg";
-import style from "./poster.style.css";
+import star from "../../../images/icon/star.svg";
+import putDecimal from "../../utils/libs.js";
+import template from "../../utils/dom.js";
+import html from "./poster.template.html";
+import css from "./poster.style.css";
 
 class Poster extends HTMLElement {
 	constructor() {
@@ -7,9 +11,12 @@ class Poster extends HTMLElement {
 		this.shadowDOM = this.attachShadow({
 			mode: 'open'
 		});
-		this._grid = '';
+		this._grid = null;
 	}
 
+	connectedCallback() {
+		this._grid = false;
+	}
 
 	set posterItem(poster) {
 		this._poster = poster;
@@ -22,30 +29,38 @@ class Poster extends HTMLElement {
 	}
 
 	render() {
-		this.shadowDOM.appendChild(this.createStyle());
 		this.shadowDOM.appendChild(this.createElem());
 	}
 
 	createElem() {
-		const posterContainer = document.createElement('div');
-		posterContainer.className = 'poster ' + this._grid;
-		const posterElem = document.createElement('div');
-		posterElem.className = this._poster.poster === null ? 'default-poster' : 'image';
-		posterElem.classList.add('shimmer');
-		posterContainer.appendChild(posterElem);
-		const posterImgElem = document.createElement('img');
-		posterImgElem.src = this._poster.poster === null ? image : this._poster.poster;
-		posterImgElem.addEventListener('load', () => {
-			posterElem.classList.remove('shimmer');
-			posterElem.appendChild(posterImgElem);
-		});
-		return posterContainer;
-	}
+		const elem = template(html, css);
+		const posterElem = elem.querySelector('poster');
+		if (this._grid) posterElem.classList.add('poster-grid');
+		const posterImgElem = elem.querySelector('.image');
+		const posterImgItem = document.createElement('img');
+		if (this._poster.poster === null) {
+			posterImgElem.classList.remove('image');
+			posterImgItem.src = image;
+		} else {
+			posterImgElem.classList.remove('default-poster');
+			posterImgItem.src = this._poster.poster;
+		}
 
-	createStyle() {
-		const styleSheet = document.createElement('style');
-		styleSheet.innerText = style;
-		return styleSheet;
+		posterImgItem.addEventListener('load', () => {
+			posterImgElem.classList.remove('shimmer');
+			posterImgElem.appendChild(posterImgItem);
+		});
+		const posterTitleElem = elem.querySelector('h5');
+		posterTitleElem.innerText = this._poster.title;
+		const rating = elem.querySelector('.rating');
+		const starElem = document.createElement('img');
+		const ratingVal = elem.querySelector('.rate');
+		starElem.src = star;
+		rating.insertBefore(starElem, ratingVal);
+		ratingVal.innerText = (this._poster.rate === 0) ? '-' : putDecimal(this._poster.rate);
+		const year = elem.querySelector('.year');
+		year.innerText = this._poster.releaseYear;
+		return elem;
 	}
 }
 

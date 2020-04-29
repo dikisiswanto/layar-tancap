@@ -3,12 +3,35 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Layar Tancap XXI</title>
+	<title>Layar Tancap 21</title>
+	<noscript>You need to enable JavaScript to run this app.</noscript>
 </head>
 <body>
+	<section>
+		<title-bar title="Genres"></title-bar>
+		<genre-list id="genres"></genre-list>
+	</section>
 	<main>
-		<gallery-list id="trending-movies"></gallery-list>
-		<gallery-list id="trending-persons"></gallery-list>
+		<section>
+			<title-bar title="Now Playing"></title-bar>
+			<gallery-list id="now-playing"></gallery-list>
+		</section>
+		<section>
+			<title-bar title="Trending Movies"></title-bar>
+			<gallery-list id="trending-movies"></gallery-list>
+		</section>
+		<section>
+			<title-bar title="Indonesian Movies"></title-bar>
+			<gallery-list id="indonesian-movies"></gallery-list>
+		</section>
+		<section>
+			<title-bar title="Upcoming Movies"></title-bar>
+			<gallery-list id="upcoming-movies"></gallery-list>
+		</section>
 	</main>
+	<footer>
+		<p>&copy; Diki Siswanto. Design adopted from <a href="https://movion.hiwijaya.com">Movion</a></p>
+		<p>Powered by <a class="tmdb" href="https://www.themoviedb.org/">TMDb</a></p>
+	</footer>
 </body>
 </html>

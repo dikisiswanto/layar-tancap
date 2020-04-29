@@ -17,9 +17,9 @@
     "dotenv-webpack": "^1.7.0",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.2.0",
-    "multi-loader": "^0.1.0",
     "style-loader": "^1.2.0",
     "svg-url-loader": "^5.0.0",
+    "to-string-loader": "^1.1.6",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3",
@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "moment": "^2.24.0",
-    "regenerator-runtime": "^0.13.5",
-    "to-string-loader": "^1.1.6"
+    "regenerator-runtime": "^0.13.5"
   }
 }
