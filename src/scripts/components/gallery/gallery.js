@@ -1,8 +1,8 @@
-import "../loader/loader.js";
-import "../poster/poster.js";
-import template from "../../utils/dom.js";
-import html from "./gallery.template.html";
-import css from "./gallery.style.css";
+import 'Components/loader/loader';
+import 'Components/poster/poster';
+import template from 'Utils/dom';
+import html from 'Components/gallery/gallery.template.html';
+import css from 'Components/gallery/gallery.style.css';
 
 class Gallery extends HTMLElement {
 	constructor() {
@@ -17,7 +17,11 @@ class Gallery extends HTMLElement {
 		this.render();
 	}
 
-	set galleryData(data) {
+	set grid(grid) {
+		this._grid = grid;
+	}
+
+	set gallery(data) {
 		this._data = data
 		this.render();
 	}
@@ -39,13 +43,33 @@ class Gallery extends HTMLElement {
 	createElem() {
 		const elem = template(html, css);
 		const list = elem.querySelector('.gallery');
-		const lastPad = list.querySelector('.pad:nth-child(2)');
+		const pad = list.querySelector('.pad');
 
-		this._data.map((poster) => {
-			const posterElem = document.createElement('poster-item');
-			posterElem.posterItem = poster;
-			list.insertBefore(posterElem, lastPad);
-		});
+		if (this._grid) {
+			list.className = 'movies';
+			pad.parentNode.removeChild(pad);
+		} else {
+			list.className = 'gallery';
+		}
+
+		const lastPad = list.querySelector('.pad:nth-child(2)');
+		const notFoundElem = list.querySelector('.not-found');
+		if(this._data.length){
+			this._data.map((poster) => {
+				const posterElem = document.createElement('poster-item');
+				posterElem.grid = this._grid ? true : false;
+				posterElem.poster = poster;
+				if (lastPad) {
+					list.insertBefore(posterElem, lastPad);
+				} else {
+					list.appendChild(posterElem);
+				}
+			});
+		} else {
+			const notFoundText = document.createElement('p');
+			notFoundText.innerText = 'Nothing found...';
+			notFoundElem.appendChild(notFoundText);
+		}
 
 		return elem;
 	}

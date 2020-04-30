@@ -1,4 +1,5 @@
-import * as lib from "../utils/libs.js";
+import {GENRES} from 'Utils/constants'
+import * as lib from 'Utils/libs';
 
 class MovieService {
 
@@ -116,34 +117,68 @@ class MovieService {
 		this.discover(params, onSuccess);
 	}
 
-	// async search(keyword, onSuccess) {
-	// 	try {
-	// 		const params = [{
-	// 				key: 'query',
-	// 				val: keyword
-	// 			},
-	// 			{
-	// 				key: 'page',
-	// 				val: 1
-	// 			},
-	// 		];
+	async search(keyword, onSuccess) {
+		try {
+			const params = [{
+					key: 'query',
+					val: keyword
+				},
+				{
+					key: 'page',
+					val: 1
+				},
+			];
 
-	// 		const response = await fetch(lib.requestURL('/search/multi', params), lib.requestHeader());
-	// 		const responseJson = await response.json();
+			const response = await fetch(lib.requestURL('/search/multi', params), lib.requestHeader());
+			const responseJson = await response.json();
 
-	// 		if (!response.ok) {
-	// 			this.handleError();
-	// 			return;
-	// 		}
+			if (!response.ok) {
+				this.handleError();
+				return;
+			}
 
-	// 		let results = lib.filterSearchResults(responseJson.results);
-	// 		onSuccess(results);
+			let results = lib.filterSearchResults(responseJson.results);
+			onSuccess(results);
 
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		this.handleError();
-	// 	}
-	// }
+		} catch (error) {
+			console.log(error);
+			this.handleError();
+		}
+	}
+
+	async getMovie(id, onSuccess) {
+		try {
+				const url = `/movie/${id}`;
+				const params = [{
+						key: 'append_to_response',
+						val: 'external_ids,credits,videos,images'
+				}]
+				const response = await fetch(lib.requestURL(url, params), lib.requestHeader());
+				const responseJson = await response.json();
+
+				if (!response.ok) {
+						this.handleError();
+						return;
+				}
+
+				const movie = lib.filterMovie(responseJson);
+
+				onSuccess(movie);
+
+		} catch (error) {
+				console.log(error);
+				this.handleError();
+		}
+}
+
+	getGenreById(id) {
+		for (let g of GENRES) {
+			if (id === g.id.toString()) {
+				return g.name;
+			}
+		}
+		return '-';
+	}
 
 	handleError() {
 		console.log('Oops, something went wrong. Please try again.');

@@ -1,6 +1,6 @@
-import template from "../../utils/dom.js";
-import css from "./title-bar.style.css";
-import html from "./title-bar.template.html";
+import template from 'Utils/dom';
+import html from 'Components/title-bar/title-bar.template.html';
+import css from 'Components/title-bar/title-bar.style.css';
 
 class TitleBar extends HTMLElement {
 	constructor() {
@@ -11,7 +11,7 @@ class TitleBar extends HTMLElement {
 	}
 
 	connectedCallback() {
-		this._title = 'Sedang memuat...';
+		this._title = 'Loading...';
 		this.render();
 	}
 

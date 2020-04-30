@@ -1,9 +1,9 @@
-import image from "../../../images/icon/image.svg";
-import star from "../../../images/icon/star.svg";
-import putDecimal from "../../utils/libs.js";
-import template from "../../utils/dom.js";
-import html from "./poster.template.html";
-import css from "./poster.style.css";
+import image from 'Assets/image.svg';
+import star from 'Assets/star.svg';
+import putDecimal from 'Utils/libs';
+import template from 'Utils/dom';
+import html from 'Components/poster/poster.template.html';
+import css from 'Components/poster/poster.style.css';
 
 class Poster extends HTMLElement {
 	constructor() {
@@ -11,21 +11,19 @@ class Poster extends HTMLElement {
 		this.shadowDOM = this.attachShadow({
 			mode: 'open'
 		});
-		this._grid = null;
 	}
 
 	connectedCallback() {
 		this._grid = false;
 	}
 
-	set posterItem(poster) {
+	set poster(poster) {
 		this._poster = poster;
 		this.render();
 	}
 
-	set posterGrid(grid) {
+	set grid(grid) {
 		this._grid = grid;
-		this.render();
 	}
 
 	render() {
@@ -34,7 +32,8 @@ class Poster extends HTMLElement {
 
 	createElem() {
 		const elem = template(html, css);
-		const posterElem = elem.querySelector('poster');
+		const posterElem = elem.querySelector('.poster');
+		posterElem.href = `movie/${this._poster.id}`;
 		if (this._grid) posterElem.classList.add('poster-grid');
 		const posterImgElem = elem.querySelector('.image');
 		const posterImgItem = document.createElement('img');

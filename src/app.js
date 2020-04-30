@@ -1,6 +1,4 @@
-import "regenerator-runtime";
-import "./styles/reset.css";
-import "./styles/main.css";
-import main from "./scripts/view/main.js";
-
-document.addEventListener('DOMContentLoaded', main);
+import 'regenerator-runtime';
+import 'Styles/reset.css';
+import 'Styles/main.css';
+import './route';

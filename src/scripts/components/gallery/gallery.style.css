@@ -1,3 +1,13 @@
+.movies {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 0 50px;
+}
+
+.movies > poster-item {
+	width: 16.666%;
+}
+
 .gallery {
 	position: relative;
 	display: flex;
@@ -20,6 +30,12 @@
 	width: 50px;
 }
 
+@media only screen and (max-width: 1500px) {
+	.movies > poster-item {
+		width: 20%;
+	}
+}
+
 @media only screen and (max-width: 1024px) {
 	.gallery {
 		scroll-padding: 30px;
@@ -28,6 +44,11 @@
 	.gallery .pad {
 		width: 30px;
 	}
+
+	.movies {
+		padding: 0 30px;
+	}
+
 }
 
 @media only screen and (max-width: 640px) {
@@ -37,5 +58,18 @@
 
 	.gallery .pad {
 		width: 20px;
+	}
+
+	.movies {
+		padding:  0 20px;
+	}
+
+	.movies > poster-item {
+		width: 33.333333%;
+	}
+}
+@media only screen and (max-width: 480px) {
+	.movies > poster-item {
+		width: 50%;
 	}
 }

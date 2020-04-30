@@ -6,6 +6,9 @@
 	overflow: hidden;
 	flex-shrink: 0;
 	box-sizing: border-box;
+	color: #fff;
+	text-decoration: none;
+	display: block;
 }
 
 .poster .image,
@@ -69,7 +72,8 @@
 }
 
 .poster-grid {
-	width: 16.666666%;
+	width: 100%;
+	max-width: 100%;
 	padding-right: 10px;
 	margin-right: 0;
 	margin-bottom: 40px;
@@ -103,7 +107,7 @@
 /* Shimmer */
 .shimmer {
 	background-color: #202124;
-	background-image: linear-gradient(to right, #202124 0%, #252424 20%, #252424 40%, #202124 100%);
+	background-image: linear-gradient(to right, #202124 0%, rgba(78, 62, 5, 0.25) 20%, rgba(78, 64, 11, 0.45) 40%, #202124 100%);
 	background-repeat: no-repeat;
 	background-size: cover;
 	animation-duration: 1s;
@@ -124,12 +128,6 @@
 }
 
 
-@media only screen and (max-width: 1500px) {
-	.poster-grid {
-		width: 20%;
-	}
-}
-
 @media only screen and (max-width: 1024px) {
 	.poster {
 		width: 200px;
@@ -139,17 +137,8 @@
 		width: 200px;
 		height: 300px;
 	}
-
-	.poster-grid {
-		width: 25%;
-	}
 }
 
-@media only screen and (max-width: 640px) {
-	.poster-grid {
-		width: 33.333333%;
-	}
-}
 
 @media only screen and (max-width: 480px) {
 	.poster {
@@ -161,7 +150,4 @@
 		height: 270px;
 	}
 
-	.poster-grid {
-		width: 50%;
-	}
 }

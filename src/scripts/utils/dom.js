@@ -1,10 +1,12 @@
-export default function template(html, css) {
-	const template = document.createElement('template');
-	template.innerHTML = `
+const template = (html, css = '') => {
+	const elem = document.createElement('template');
+	elem.innerHTML = `
 		<style>
 		${css}
 		</style>
 		${html}
 	`;
-	return document.importNode(template.content, true);
+	return document.importNode(elem.content, true);
 }
+
+export default template;

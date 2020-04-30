@@ -3,7 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv-webpack');
 
 module.exports = {
-    entry: path.resolve(__dirname, './src/app.js'),
+    entry: path.resolve(__dirname, 'src/app.js'),
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
@@ -20,7 +20,7 @@ module.exports = {
                 use: ['to-string-loader', 'css-loader']
             },
             {
-                test: /\.template\.html$/i,
+                test: /\.html$/i,
                 use: ['html-loader']
             },
             {
@@ -32,7 +32,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './public/index.html'),
+            template: path.resolve(__dirname, 'public/index.html'),
             filename: 'index.html',
             minify: {
                 collapseWhitespace: true,
@@ -45,4 +45,14 @@ module.exports = {
         }),
         new dotenv()
     ],
+    resolve: {
+        alias: {
+          Services: path.resolve(__dirname, 'src/scripts/services'),
+          Pages: path.resolve(__dirname, 'src/scripts/pages'),
+          Components: path.resolve(__dirname, 'src/scripts/components'),
+          Styles: path.resolve(__dirname, 'src/styles'),
+          Utils: path.resolve(__dirname, 'src/scripts/utils'),
+          Assets: path.resolve(__dirname, 'src/images/icon'),
+        },
+      },
 }

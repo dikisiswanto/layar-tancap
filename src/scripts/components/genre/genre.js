@@ -1,7 +1,7 @@
-import {GENRES} from "../../utils/constants.js";
-import template from "../../utils/dom.js";
-import html from "./genre.template.html";
-import css from "./genre.style.css";
+import {GENRES} from 'Utils/constants';
+import template from 'Utils/dom';
+import html from 'Components/genre/genre.template.html';
+import css from 'Components/genre/genre.style.css';
 
 class Genre extends HTMLElement {
 	constructor() {
@@ -17,9 +17,7 @@ class Genre extends HTMLElement {
 	}
 
 	render() {
-		if (this._data) {
-			this.shadowDOM.appendChild(this.createElem());
-		}
+		this.shadowDOM.appendChild(this.createElem());
 	}
 
 	createElem() {
@@ -28,8 +26,8 @@ class Genre extends HTMLElement {
 		const lastPad = list.querySelector('.pad:nth-child(2)');
 
 		this._data.map((genre) => {
-			const genreElem = document.createElement('span');
-			genreElem.setAttribute('key', genre.id);
+			const genreElem = document.createElement('a');
+			genreElem.setAttribute('href', `/movie/genre/${genre.id}`);
 			const genreName = document.createElement('h5');
 			genreName.innerText = genre.name;
 			genreElem.appendChild(genreName);

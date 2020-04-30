@@ -1,8 +1,8 @@
 import template from 'Utils/dom';
-import html from 'Components/loader/loader.template.html';
-import css from 'Components/loader/loader.style.css';
+import html from 'Components/back-button/back-button.template.html';
+import css from 'Components/back-button/back-button.style.css';
 
-class Loader extends HTMLElement {
+class BackButton extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
@@ -24,4 +24,4 @@ class Loader extends HTMLElement {
 	}
 }
 
-customElements.define('loader-item', Loader);
+customElements.define('back-button', BackButton);

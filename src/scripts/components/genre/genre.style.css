@@ -11,22 +11,24 @@
 	scroll-padding: 50px;
 	-ms-overflow-style: none;
 	box-sizing: border-box;
+	margin-top: 10px;
 }
 
 .genres::-webkit-scrollbar {
 	display: none;
 }
 
-.genres span {
+.genres a {
 	margin-right: 10px;
 	padding: 20px 40px;
 	color: #FFE170;
 	background-color: #262626;
 	scroll-snap-align: start;
 	transition: padding 0.2s ease;
+	text-decoration: none;
 }
 
-.genres span:hover {
+.genres a:hover {
 	padding: 20px 50px;
 	cursor: pointer;
 }
@@ -36,7 +38,7 @@
 	width: 50px;
 }
 
-.genres span h5 {
+.genres a h5 {
 	margin: 0;
 	padding: 0;
 }
