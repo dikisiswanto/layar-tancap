@@ -2,6 +2,10 @@
 
 Project ini merupakan submission akhir untuk kelas [Dicoding - Belajar Fundamental Front-End Web Development](https://dicoding.com/academies/163).
 
+## Demo Aplikasi
+
+Demo aplikasi dapat dilihat pada [https://dikisiswanto.github.io/layar-tancap/](https://dikisiswanto.github.io/layar-tancap/)
+
 ## Instal dan Konfigurasi
 
 - Clone repository
