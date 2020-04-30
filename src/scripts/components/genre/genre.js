@@ -27,7 +27,7 @@ class Genre extends HTMLElement {
 
 		this._data.map((genre) => {
 			const genreElem = document.createElement('a');
-			genreElem.setAttribute('href', `/movie/genre/${genre.id}`);
+			genreElem.setAttribute('href', `movie/genre/${genre.id}`);
 			const genreName = document.createElement('h5');
 			genreName.innerText = genre.name;
 			genreElem.appendChild(genreName);

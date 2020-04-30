@@ -1,5 +1,6 @@
 import image from 'Assets/image.svg';
 import star from 'Assets/star.svg';
+import putDecimal from 'Utils/libs';
 import MovieService from 'Services/movie-service';
 import template from 'Utils/dom';
 import html from 'Pages/detail/detail.template.html';
@@ -32,23 +33,32 @@ export default class Detail extends HTMLElement {
 			if (movie.id) {
 				elem.querySelector('p.story').innerText = (movie.overview !== null) ? movie.overview : '-';
 				elem.querySelector('.title-section h2').innerText = movie.title;
-				const posterELem = elem.querySelector('.poster');
+				const posterImgElem = elem.querySelector('.poster');
 				const posterImgItem = document.createElement('img');
 				if (movie.poster === null) {
-					posterELem.classList.remove('poster');
+					posterImgElem.classList.remove('poster');
 					posterImgItem.src = image;
 				} else {
-					posterELem.classList.remove('default-image');
+					posterImgElem.classList.remove('default-image');
 					posterImgItem.src = movie.poster;
 				}
+
 				posterImgItem.addEventListener('load', () => {
-					// posterELem.classList.remove('shimmer');
-					// posterElem.appendChild(posterImgItem);
+					posterImgElem.classList.remove('shimmer');
+					posterImgElem.appendChild(posterImgItem);
 				});
 				const attributes = ['director', 'release', 'shortGenre', 'duration', 'budget', 'revenue'];
 				attributes.map((attr) => {
 					elem.querySelector(`[data-name=${attr}] span:nth-child(2)`).innerText = eval(`movie.${attr}`);
 				});
+				const rating = elem.querySelector('.rating');
+				const starElem = document.createElement('img');
+				const ratingVal = elem.querySelector('.rate');
+				starElem.src = star;
+				rating.insertBefore(starElem, ratingVal);
+				ratingVal.innerText = (movie.rate === 0) ? '-' : putDecimal(movie.rate);
+				elem.querySelector('.reviews').innerText = movie.vote;
+				elem.querySelector('[data-name=productions]').innerText = movie.productions;
 			} else {
 				elem.querySelector('.not-found').innerText = 'Nothing found...';
 				(elem.querySelector('main')).parentNode.removeChild(elem.querySelector('main'));
