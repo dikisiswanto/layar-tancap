@@ -10,8 +10,8 @@ Demo aplikasi dapat dilihat pada [https://dikisiswanto.github.io/layar-tancap/](
 
 - Clone repository
 ```
-git clone https://github.com/dikisiswanto/layar-tancap.git
-cd layar-tancap
+$ git clone https://github.com/dikisiswanto/layar-tancap.git
+$ cd layar-tancap
 $ npm install
 ```
 
