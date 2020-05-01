@@ -19,51 +19,64 @@ export default class Detail extends HTMLElement {
 
 	connectedCallback() {
 		this._movieId = (location.pathname).split('/')[2];
+		this._data = null;
 		this.render();
 	}
 
 	render() {
 		this.shadowDOM.innerHTML = '';
-		this.loadDetail()
+		if (this._data === null) {
+			this.shadowDOM.appendChild(this.createLoader());
+			this.loadDetail();
+		} else {
+			this.shadowDOM.appendChild(this.createElem());
+		}
+	}
+
+	createLoader() {
+		const loader = document.createElement('loader-item');
+		return loader;
+	}
+
+	createElem() {
+		const elem = template(html, css);
+		elem.querySelector('p.story').innerText = (this._data.overview !== null) ? this._data.overview : '-';
+		elem.querySelector('.title-section h2').innerText = this._data.title;
+		const posterImgElem = elem.querySelector('.poster');
+		const posterImgItem = document.createElement('img');
+		if (this._data.poster === null) {
+			posterImgElem.classList.remove('poster');
+			posterImgItem.src = image;
+		} else {
+			posterImgElem.classList.remove('default-image');
+			posterImgItem.src = this._data.poster;
+		}
+
+		posterImgItem.addEventListener('load', () => {
+			posterImgElem.classList.remove('shimmer');
+			posterImgElem.appendChild(posterImgItem);
+		});
+		const attributes = ['director', 'release', 'shortGenre', 'duration', 'budget', 'revenue'];
+		attributes.map((attr) => {
+			elem.querySelector(`[data-name=${attr}] span:nth-child(2)`).innerText = eval(`this._data.${attr}`);
+		});
+		const rating = elem.querySelector('.rating');
+		const starElem = document.createElement('img');
+		const ratingVal = elem.querySelector('.rate');
+		starElem.src = star;
+		rating.insertBefore(starElem, ratingVal);
+		ratingVal.innerText = (this._data.rate === 0) ? '-' : putDecimal(this._data.rate);
+		elem.querySelector('.reviews').innerText = this._data.vote;
+		elem.querySelector('[data-name=productions]').innerText = this._data.productions;
+		return elem;
 	}
 
 	loadDetail() {
-		const elem = template(html, css);
 		service.getMovie(this._movieId, (movie) => {
-			if (movie.id) {
-				elem.querySelector('p.story').innerText = (movie.overview !== null) ? movie.overview : '-';
-				elem.querySelector('.title-section h2').innerText = movie.title;
-				const posterImgElem = elem.querySelector('.poster');
-				const posterImgItem = document.createElement('img');
-				if (movie.poster === null) {
-					posterImgElem.classList.remove('poster');
-					posterImgItem.src = image;
-				} else {
-					posterImgElem.classList.remove('default-image');
-					posterImgItem.src = movie.poster;
-				}
-
-				posterImgItem.addEventListener('load', () => {
-					posterImgElem.classList.remove('shimmer');
-					posterImgElem.appendChild(posterImgItem);
-				});
-				const attributes = ['director', 'release', 'shortGenre', 'duration', 'budget', 'revenue'];
-				attributes.map((attr) => {
-					elem.querySelector(`[data-name=${attr}] span:nth-child(2)`).innerText = eval(`movie.${attr}`);
-				});
-				const rating = elem.querySelector('.rating');
-				const starElem = document.createElement('img');
-				const ratingVal = elem.querySelector('.rate');
-				starElem.src = star;
-				rating.insertBefore(starElem, ratingVal);
-				ratingVal.innerText = (movie.rate === 0) ? '-' : putDecimal(movie.rate);
-				elem.querySelector('.reviews').innerText = movie.vote;
-				elem.querySelector('[data-name=productions]').innerText = movie.productions;
-			} else {
-				elem.querySelector('.not-found').innerText = 'Nothing found...';
-				(elem.querySelector('main')).parentNode.removeChild(elem.querySelector('main'));
+			if (movie) {
+				this._data = movie;
+				this.render();
 			}
-			this.shadowDOM.appendChild(elem);
 		})
 	}
 
