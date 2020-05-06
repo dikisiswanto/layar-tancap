@@ -9,7 +9,7 @@ class Poster extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
+			mode: 'open',
 		});
 	}
 
@@ -56,11 +56,12 @@ class Poster extends HTMLElement {
 		const ratingVal = elem.querySelector('.rate');
 		starElem.src = star;
 		rating.insertBefore(starElem, ratingVal);
-		ratingVal.innerText = (this._poster.rate === 0) ? '-' : putDecimal(this._poster.rate);
+		ratingVal.innerText =
+			this._poster.rate === 0 ? '-' : putDecimal(this._poster.rate);
 		const year = elem.querySelector('.year');
 		year.innerText = this._poster.releaseYear;
 		return elem;
 	}
 }
 
-customElements.define('poster-item', Poster)
+customElements.define('poster-item', Poster);

@@ -1,13 +1,13 @@
 import moment from 'moment';
-import * as constant from './constants.js';
+import * as constant from './constants';
 
 export function requestHeader() {
 	return {
 		method: 'GET',
 		headers: {
-			'Accept': 'application/json'
-		}
-	}
+			Accept: 'application/json',
+		},
+	};
 }
 
 export function requestURL(endpoint, params) {
@@ -17,34 +17,34 @@ export function requestURL(endpoint, params) {
 
 	params.push({
 		key: 'api_key',
-		val: constant.TMDB_API_KEY
+		val: constant.TMDB_API_KEY,
 	});
 
 	params.push({
 		key: 'include_adult',
-		val: false
+		val: false,
 	});
 
 	params.push({
 		key: 'include_video',
-		val: false
+		val: false,
 	});
 
-	let paramArr = [];
-	for (let param of params) {
-		const paramStr = param.key + '=' + param.val;
+	const paramArr = [];
+	for (const param of params) {
+		const paramStr = `${param.key}=${param.val}`;
 		paramArr.push(paramStr);
 	}
 
-	return constant.BASE_URL + endpoint + '?' + paramArr.join('&');
+	return `${constant.BASE_URL + endpoint}?${paramArr.join('&')}`;
 }
 
 export function getPosterURL(path) {
-	return (path === null) ? null : constant.POSTER_URL + path;
+	return path === null ? null : constant.POSTER_URL + path;
 }
 
 export function getProfileURL(path) {
-	return (path === null) ? null : constant.PROFILE_URL + path;
+	return path === null ? null : constant.PROFILE_URL + path;
 }
 
 export function getYear(date) {
@@ -85,10 +85,9 @@ function formatMinutes(minutes) {
 	const m = minutes % 60;
 
 	if (m === 0) {
-		return h + 'h';
+		return `${h}h`;
 	}
-	return h + 'h ' + m + 'm';
-
+	return `${h}h ${m}m`;
 }
 
 function handleNull(input, ifNull, result) {
@@ -101,59 +100,66 @@ function handleNull(input, ifNull, result) {
 function getDirector(crew) {
 	let id = '';
 	let name = '?';
-	for (let c of crew) {
-			if (c.job === 'Director') {
-					id = c.id;
-					name = c.name;
-					break;
-			}
+	for (const c of crew) {
+		if (c.job === 'Director') {
+			id = c.id;
+			name = c.name;
+			break;
+		}
 	}
-	return {id, name};
+	return {
+		id,
+		name,
+	};
 }
 
 function formatCurrency(amount) {
-	if (amount === "") {
-			return '0';
+	if (amount === '') {
+		return '0';
 	}
 
 	let formatedAmount = '';
 	if (typeof amount === 'number') {
-			formatedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		formatedAmount = amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	} else {
-			formatedAmount = parseFloat(amount.replace(/\,/g, "")).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		formatedAmount = parseFloat(amount.replace(/\,/g, ''))
+			.toString()
+			.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	}
 
-	return '$' + formatedAmount;
+	return `$${formatedAmount}`;
 }
 
 function getShortGenre(genres) {
 	if (genres === null || genres.length === 0) {
-			return '';
+		return '';
 	}
 	if (genres.length < 2) {
-			let genre = (genres[0].name === 'Science Fiction') ? 'Sci-Fi' : genres[0].name;
-			return genre;
+		const genre =
+			genres[0].name === 'Science Fiction' ? 'Sci-Fi' : genres[0].name;
+		return genre;
 	}
 
-	let genre1 = (genres[0].name === 'Science Fiction') ? 'Sci-Fi' : genres[0].name;
-	let genre2 = (genres[1].name === 'Science Fiction') ? 'Sci-Fi' : genres[1].name;
-	
+	const genre1 =
+		genres[0].name === 'Science Fiction' ? 'Sci-Fi' : genres[0].name;
+	const genre2 =
+		genres[1].name === 'Science Fiction' ? 'Sci-Fi' : genres[1].name;
+
 	return `${genre1}/${genre2}`;
 }
 
 export function productionList(productions) {
-	let companies = [];
-	productions.map((p) => companies.push(p.name) );
+	const companies = [];
+	productions.map((p) => companies.push(p.name));
 
 	return companies.join(', ');
 }
 
 export function filterMovie(rawData) {
-
-	let ids = rawData.external_ids;
+	const ids = rawData.external_ids;
 	ids.homepage = rawData.homepage || null;
 
-	let movie = {
+	const movie = {
 		id: rawData.id,
 		title: rawData.title,
 		overview: rawData.overview,
@@ -169,7 +175,7 @@ export function filterMovie(rawData) {
 		revenue: handleNull(rawData.revenue, '?', formatCurrency(rawData.revenue)),
 		duration: formatMinutes(rawData.runtime), // in minutes
 		director: getDirector(rawData.credits.crew).name, // {id, name}
-	}
+	};
 
 	return movie;
 }
@@ -178,29 +184,28 @@ export default function putDecimal(num) {
 	if (num % 1 === 0) {
 		return `${num.toString()}.0`;
 	}
-	return num
+	return num;
 }
 
 export function filterMovies(rawData) {
-	let filteredData = [];
-	for (let data of rawData) {
+	const filteredData = [];
+	for (const data of rawData) {
 		const fd = {
 			mediaType: 'movie',
 			id: data.id,
 			title: data.title,
 			poster: getPosterURL(data.poster_path),
 			rate: data.vote_average,
-			releaseYear: getYear(data.release_date)
-		}
+			releaseYear: getYear(data.release_date),
+		};
 		filteredData.push(fd);
 	}
 	return filteredData;
 }
 
 export function filterSearchResults(rawData) {
-	let filteredData = [];
-	for (let data of rawData) {
-
+	const filteredData = [];
+	for (const data of rawData) {
 		const mediaType = data.media_type;
 
 		if (mediaType === 'movie') {
@@ -211,7 +216,7 @@ export function filterSearchResults(rawData) {
 				poster: getPosterURL(data.poster_path),
 				rate: data.vote_average,
 				releaseYear: getYear(data.release_date),
-			}
+			};
 			filteredData.push(movie);
 		}
 	}

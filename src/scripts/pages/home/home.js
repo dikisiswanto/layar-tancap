@@ -13,7 +13,7 @@ export default class Home extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
+			mode: 'open',
 		});
 	}
 
@@ -36,7 +36,7 @@ export default class Home extends HTMLElement {
 		this.render(trendingElem);
 		service.getTrending((movies) => {
 			this.render(trendingElem, movies);
-		})
+		});
 	}
 
 	loadUpcomingMovies(elem) {
@@ -44,23 +44,23 @@ export default class Home extends HTMLElement {
 		this.render(upcomingElem);
 		service.getUpcomingMovies((movies) => {
 			this.render(upcomingElem, movies);
-		})
+		});
 	}
 
 	loadShowingMovies(elem) {
-		const showingElem = elem.querySelector('#now-playing')
+		const showingElem = elem.querySelector('#now-playing');
 		this.render(showingElem);
 		service.getShowing((movies) => {
-			this.render(showingElem, movies)
-		})
+			this.render(showingElem, movies);
+		});
 	}
 
 	loadIndonesianMovies(elem) {
-		const indonesianMoviesElem = elem.querySelector('#indonesian-movies')
+		const indonesianMoviesElem = elem.querySelector('#indonesian-movies');
 		this.render(indonesianMoviesElem);
 		service.getIndonesianMovies((movies) => {
-			this.render(indonesianMoviesElem, movies)
-		})
+			this.render(indonesianMoviesElem, movies);
+		});
 	}
 
 	render(refElem, data) {
@@ -68,7 +68,6 @@ export default class Home extends HTMLElement {
 		const titleElem = refElem.previousElementSibling;
 		titleElem.title = titleElem.getAttribute('title');
 	}
-
 }
 
 customElements.define('home-page', Home);

@@ -6,8 +6,8 @@ class TitleBar extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
-		})
+			mode: 'open',
+		});
 	}
 
 	connectedCallback() {
@@ -17,7 +17,7 @@ class TitleBar extends HTMLElement {
 
 	set title(title) {
 		this._title = title;
-		this.render()
+		this.render();
 	}
 
 	render() {

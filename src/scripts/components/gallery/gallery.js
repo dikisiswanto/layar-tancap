@@ -8,7 +8,7 @@ class Gallery extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
+			mode: 'open',
 		});
 	}
 
@@ -22,7 +22,7 @@ class Gallery extends HTMLElement {
 	}
 
 	set gallery(data) {
-		this._data = data
+		this._data = data;
 		this.render();
 	}
 
@@ -31,7 +31,7 @@ class Gallery extends HTMLElement {
 		if (this._data) {
 			this.shadowDOM.appendChild(this.createElem());
 		} else {
-			this.shadowDOM.appendChild(this.createLoader())
+			this.shadowDOM.appendChild(this.createLoader());
 		}
 	}
 
@@ -54,10 +54,10 @@ class Gallery extends HTMLElement {
 
 		const lastPad = list.querySelector('.pad:nth-child(2)');
 		const notFoundElem = list.querySelector('.not-found');
-		if(this._data.length){
+		if (this._data.length) {
 			this._data.map((poster) => {
 				const posterElem = document.createElement('poster-item');
-				posterElem.grid = this._grid ? true : false;
+				posterElem.grid = !!this._grid;
 				posterElem.poster = poster;
 				if (lastPad) {
 					list.insertBefore(posterElem, lastPad);

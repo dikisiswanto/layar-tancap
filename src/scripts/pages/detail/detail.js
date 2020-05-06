@@ -13,12 +13,12 @@ export default class Detail extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
+			mode: 'open',
 		});
 	}
 
 	connectedCallback() {
-		this._movieId = (location.pathname).split('/')[2];
+		this._movieId = location.pathname.split('/')[2];
 		this._data = null;
 		this.render();
 	}
@@ -41,7 +41,8 @@ export default class Detail extends HTMLElement {
 	createElem() {
 		const elem = template(html, css);
 		const movie = this._data;
-		elem.querySelector('p.story').innerText = (movie.overview !== null) ? movie.overview : '-';
+		elem.querySelector('p.story').innerText =
+			movie.overview !== null ? movie.overview : '-';
 		elem.querySelector('.title-section h2').innerText = movie.title;
 		const posterImgElem = elem.querySelector('.poster');
 		const posterImgItem = document.createElement('img');
@@ -57,16 +58,25 @@ export default class Detail extends HTMLElement {
 			posterImgElem.classList.remove('shimmer');
 			posterImgElem.appendChild(posterImgItem);
 		});
-		const attributes = ['director', 'release', 'shortGenre', 'duration', 'budget', 'revenue'];
+		const attributes = [
+			'director',
+			'release',
+			'shortGenre',
+			'duration',
+			'budget',
+			'revenue',
+		];
 		attributes.map((attr) => {
-			elem.querySelector(`[data-name=${attr}] span:nth-child(2)`).innerText = eval(`movie.${attr}`);
+			elem.querySelector(
+				`[data-name=${attr}] span:nth-child(2)`
+			).innerText = eval(`movie.${attr}`);
 		});
 		const rating = elem.querySelector('.rating');
 		const starElem = document.createElement('img');
 		const ratingVal = elem.querySelector('.rate');
 		starElem.src = star;
 		rating.insertBefore(starElem, ratingVal);
-		ratingVal.innerText = (movie.rate === 0) ? '-' : putDecimal(movie.rate);
+		ratingVal.innerText = movie.rate === 0 ? '-' : putDecimal(movie.rate);
 		elem.querySelector('.reviews').innerText = movie.vote;
 		elem.querySelector('[data-name=productions]').innerText = movie.productions;
 		return elem;
@@ -78,9 +88,8 @@ export default class Detail extends HTMLElement {
 				this._data = movie;
 				this.render();
 			}
-		})
+		});
 	}
-
 }
 
 customElements.define('detail-page', Detail);

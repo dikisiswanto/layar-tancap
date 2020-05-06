@@ -13,13 +13,13 @@ export default class Discover extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
+			mode: 'open',
 		});
 	}
 
 	connectedCallback() {
-		this._type = (location.pathname).split('/')[2];
-		this._query = decodeURI((location.pathname).split('/')[3]);
+		this._type = location.pathname.split('/')[2];
+		this._query = decodeURI(location.pathname.split('/')[3]);
 		this.render();
 	}
 
@@ -31,24 +31,24 @@ export default class Discover extends HTMLElement {
 		if (this._type === 'genre') {
 			service.getMoviesByGenre(this._query, (movies) => {
 				this.setData(galleryElem, movies);
-			})
+			});
 		} else {
 			service.search(this._query, (movies) => {
 				this.setData(galleryElem, movies);
-			})
+			});
 		}
-		this.shadowDOM.appendChild(elem)
+		this.shadowDOM.appendChild(elem);
 	}
 
 	setData(elem, data) {
 		elem.gallery = data;
-		const title = this._type === 'genre' ? `Genre: ${service.getGenreById(this._query)}` : `Results for: ${this._query}`;
+		const title =
+			this._type === 'genre'
+				? `Genre: ${service.getGenreById(this._query)}`
+				: `Results for: ${this._query}`;
 		const titleElem = elem.previousElementSibling;
 		titleElem.title = title;
 	}
-
-	
-
 }
 
 customElements.define('discover-page', Discover);

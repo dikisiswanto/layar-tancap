@@ -1,11 +1,13 @@
-import {GENRES} from 'Utils/constants'
+import { GENRES } from 'Utils/constants';
 import * as lib from 'Utils/libs';
 
 class MovieService {
-
 	async getTrending(onSuccess) {
 		try {
-			const response = await fetch(lib.requestURL(`/trending/movie/day`, null), lib.requestHeader());
+			const response = await fetch(
+				lib.requestURL(`/trending/movie/day`, null),
+				lib.requestHeader()
+			);
 			const responseJson = await response.json();
 
 			if (!response.ok) {
@@ -13,8 +15,8 @@ class MovieService {
 				return;
 			}
 
-			let data = responseJson.results;
-			let movies = lib.filterMovies(data);
+			const data = responseJson.results;
+			const movies = lib.filterMovies(data);
 			onSuccess(movies);
 		} catch (error) {
 			console.log(error);
@@ -24,7 +26,10 @@ class MovieService {
 
 	async discover(params, onSuccess) {
 		try {
-			const response = await fetch(lib.requestURL('/discover/movie', params), lib.requestHeader());
+			const response = await fetch(
+				lib.requestURL('/discover/movie', params),
+				lib.requestHeader()
+			);
 			const responseJson = await response.json();
 
 			if (!response.ok) {
@@ -42,76 +47,80 @@ class MovieService {
 	}
 
 	async getIndonesianMovies(onSuccess) {
-		const params = [{
+		const params = [
+			{
 				key: 'region',
-				val: 'ID'
+				val: 'ID',
 			},
 			{
 				key: 'with_original_language',
-				val: 'id'
+				val: 'id',
 			},
 			{
 				key: 'sort_by',
-				val: 'popularity.desc'
+				val: 'popularity.desc',
 			},
 			{
 				key: 'page',
-				val: 1
-			}
+				val: 1,
+			},
 		];
 		this.discover(params, onSuccess);
 	}
 
 	async getShowing(onSuccess) {
-		const params = [{
+		const params = [
+			{
 				key: 'primary_release_date.gte',
-				val: lib.formatDate(lib.oneMonthBefore())
+				val: lib.formatDate(lib.oneMonthBefore()),
 			},
 			{
 				key: 'primary_release_date.lte',
-				val: lib.formatDate(lib.now())
+				val: lib.formatDate(lib.now()),
 			},
 			{
 				key: 'sort_by',
-				val: 'popularity.desc'
+				val: 'popularity.desc',
 			},
 			{
 				key: 'page',
-				val: 1
+				val: 1,
 			},
 		];
 		this.discover(params, onSuccess);
 	}
 
 	async getUpcomingMovies(onSuccess) {
-		const params = [{
+		const params = [
+			{
 				key: 'primary_release_date.gte',
-				val: lib.formatDate(lib.now())
+				val: lib.formatDate(lib.now()),
 			},
 			{
 				key: 'sort_by',
-				val: 'popularity.desc'
+				val: 'popularity.desc',
 			},
 			{
 				key: 'page',
-				val: 1
+				val: 1,
 			},
 		];
 		this.discover(params, onSuccess);
 	}
 
-	async getMoviesByGenre(genre_id, onSuccess) {
-		const params = [{
+	async getMoviesByGenre(genreId, onSuccess) {
+		const params = [
+			{
 				key: 'with_genres',
-				val: genre_id
+				val: genreId,
 			},
 			{
 				key: 'sort_by',
-				val: 'popularity.desc'
+				val: 'popularity.desc',
 			},
 			{
 				key: 'page',
-				val: 1
+				val: 1,
 			},
 		];
 		this.discover(params, onSuccess);
@@ -119,17 +128,21 @@ class MovieService {
 
 	async search(keyword, onSuccess) {
 		try {
-			const params = [{
+			const params = [
+				{
 					key: 'query',
-					val: keyword
+					val: keyword,
 				},
 				{
 					key: 'page',
-					val: 1
+					val: 1,
 				},
 			];
 
-			const response = await fetch(lib.requestURL('/search/multi', params), lib.requestHeader());
+			const response = await fetch(
+				lib.requestURL('/search/multi', params),
+				lib.requestHeader()
+			);
 			const responseJson = await response.json();
 
 			if (!response.ok) {
@@ -137,9 +150,8 @@ class MovieService {
 				return;
 			}
 
-			let results = lib.filterSearchResults(responseJson.results);
+			const results = lib.filterSearchResults(responseJson.results);
 			onSuccess(results);
-
 		} catch (error) {
 			console.log(error);
 			this.handleError();
@@ -148,31 +160,35 @@ class MovieService {
 
 	async getMovie(id, onSuccess) {
 		try {
-				const url = `/movie/${id}`;
-				const params = [{
-						key: 'append_to_response',
-						val: 'external_ids,credits,videos,images'
-				}]
-				const response = await fetch(lib.requestURL(url, params), lib.requestHeader());
-				const responseJson = await response.json();
+			const url = `/movie/${id}`;
+			const params = [
+				{
+					key: 'append_to_response',
+					val: 'external_ids,credits,videos,images',
+				},
+			];
+			const response = await fetch(
+				lib.requestURL(url, params),
+				lib.requestHeader()
+			);
+			const responseJson = await response.json();
 
-				if (!response.ok) {
-						this.handleError();
-						return;
-				}
-
-				const movie = lib.filterMovie(responseJson);
-
-				onSuccess(movie);
-
-		} catch (error) {
-				console.log(error);
+			if (!response.ok) {
 				this.handleError();
+				return;
+			}
+
+			const movie = lib.filterMovie(responseJson);
+
+			onSuccess(movie);
+		} catch (error) {
+			console.log(error);
+			this.handleError();
 		}
-}
+	}
 
 	getGenreById(id) {
-		for (let g of GENRES) {
+		for (const g of GENRES) {
 			if (id === g.id.toString()) {
 				return g.name;
 			}

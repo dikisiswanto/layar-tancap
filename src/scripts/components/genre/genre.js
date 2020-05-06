@@ -1,4 +1,4 @@
-import {GENRES} from 'Utils/constants';
+import { GENRES } from 'Utils/constants';
 import template from 'Utils/dom';
 import html from 'Components/genre/genre.template.html';
 import css from 'Components/genre/genre.style.css';
@@ -7,7 +7,7 @@ class Genre extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
+			mode: 'open',
 		});
 	}
 

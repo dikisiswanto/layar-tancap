@@ -7,6 +7,6 @@ const template = (html, css = '') => {
 		${html}
 	`;
 	return document.importNode(elem.content, true);
-}
+};
 
 export default template;

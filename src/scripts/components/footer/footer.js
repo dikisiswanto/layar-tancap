@@ -1,4 +1,4 @@
-import template from 'Utils/dom.js';
+import template from 'Utils/dom';
 import html from 'Components/footer/footer.template.html';
 import css from 'Components/footer/footer.style.css';
 
@@ -6,7 +6,7 @@ class Footer extends HTMLElement {
 	constructor() {
 		super();
 		this.shadowDOM = this.attachShadow({
-			mode: 'open'
+			mode: 'open',
 		});
 	}
 
@@ -15,10 +15,10 @@ class Footer extends HTMLElement {
 	}
 
 	render() {
-		this.shadowDOM.appendChild(this.loadELem());
+		this.shadowDOM.appendChild(this.createElem());
 	}
 
-	loadELem() {
+	createElem() {
 		const elem = template(html, css);
 		return elem;
 	}
