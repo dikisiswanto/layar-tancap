@@ -5,7 +5,7 @@
   },
   "extends": [
     "airbnb-base",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "plugins": ["prettier"],
   "globals": {
@@ -18,10 +18,12 @@
   },
   "parser": "babel-eslint",
   "rules": {
-    "no-tabs": 0,
     "prettier/prettier": ["error"],
     "no-underscore-dangle": "off",
-    "no-param-reassign": "off"
+    "no-param-reassign": "off",
+    "no-restricted-syntax": "off",
+    "no-console": "off",
+    "class-methods-use-this": "off"
   },
   "settings": {
     "import/resolver": {
