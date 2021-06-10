@@ -1,7 +1,5 @@
 # LAYAR TANCAP 21
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/1e8fbef1317e42ab86e6eacc8994a428)](https://app.codacy.com/manual/dickyachmady/layar-tancap?utm_source=github.com&utm_medium=referral&utm_content=dikisiswanto/layar-tancap&utm_campaign=Badge_Grade_Dashboard)
-
 Project ini merupakan submission akhir untuk kelas [Dicoding - Belajar Fundamental Front-End Web Development](https://dicoding.com/academies/163).
 
 ## Demo Aplikasi
