@@ -1,153 +1,153 @@
 .poster {
-	width: 240px;
-	margin-right: 10px;
-	box-sizing: border-box;
-	scroll-snap-align: start;
-	overflow: hidden;
-	flex-shrink: 0;
-	box-sizing: border-box;
-	color: #fff;
-	text-decoration: none;
-	display: block;
+  width: 240px;
+  margin-right: 10px;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+  overflow: hidden;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  color: #fff;
+  text-decoration: none;
+  display: block;
 }
 
 .poster .image,
 .poster .default-poster {
-	position: relative;
-	width: 100%;
-	height: 0;
-	padding-top: 150%;
-	overflow: hidden;
-	background-color: #202124;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 150%;
+  overflow: hidden;
+  background-color: #202124;
 }
 
 .poster .default-poster img {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-top: -20px;
-	margin-left: -20px;
-	width: 40px;
-	height: 40px;
-	transition: transform 0.5s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.5s ease;
 }
 
 .poster .image img {
-	position: absolute;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	transition: transform 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
 }
 
 .poster .image:hover img,
 .poster .default-poster:hover img {
-	transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .poster .title {
-	margin: 12px 0;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	font-size: 1.0em;
+  margin: 12px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.0em;
 }
 
 .poster .year {
-	color: #80868B;
-	margin: 0;
-	margin-left: 20px;
-	font-size: 1.0em;
+  color: #80868B;
+  margin: 0;
+  margin-left: 20px;
+  font-size: 1.0em;
 }
 
 .explore {
-	width: 240px;
-	height: 360px;
-	color: #FFE170;
-	background-color: #262626;
-	scroll-snap-align: start;
+  width: 240px;
+  height: 360px;
+  color: #FFE170;
+  background-color: #262626;
+  scroll-snap-align: start;
 }
 
 .poster-grid {
-	width: 100%;
-	max-width: 100%;
-	padding-right: 10px;
-	margin-right: 0;
-	margin-bottom: 40px;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 10px;
+  margin-right: 0;
+  margin-bottom: 40px;
 }
 
 /* rating */
 .rating {
-	display: inline-flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .rating img {
-	width: 14px;
-	height: 14px;
-	margin-right: 5px;
+  width: 14px;
+  height: 14px;
+  margin-right: 5px;
 }
 
 .rating div {
-	color: #FFE170;
-	font-weight: 700;
+  color: #FFE170;
+  font-weight: 700;
 }
 
 .chorizontal {
-	display: flex;
-	align-items: center;
-	flex-direction: row;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 /* Shimmer */
 .shimmer {
-	background-color: #202124;
-	background-image: linear-gradient(to right, #202124 0%, rgba(78, 62, 5, 0.25) 20%, rgba(78, 64, 11, 0.45) 40%, #202124 100%);
-	background-repeat: no-repeat;
-	background-size: cover;
-	animation-duration: 1s;
-	animation-fill-mode: forwards;
-	animation-iteration-count: infinite;
-	animation-name: placeholderShimmer;
-	animation-timing-function: linear;
+  background-color: #202124;
+  background-image: linear-gradient(to right, #202124 0%, rgba(78, 62, 5, 0.25) 20%, rgba(78, 64, 11, 0.45) 40%, #202124 100%);
+  background-repeat: no-repeat;
+  background-size: cover;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
 }
 
 @keyframes placeholderShimmer {
-	0% {
-		background-position: -468px 0;
-	}
+  0% {
+    background-position: -468px 0;
+  }
 
-	100% {
-		background-position: 468px 0;
-	}
+  100% {
+    background-position: 468px 0;
+  }
 }
 
 
 @media only screen and (max-width: 1024px) {
-	.poster {
-		width: 200px;
-	}
+  .poster {
+    width: 200px;
+  }
 
-	.explore {
-		width: 200px;
-		height: 300px;
-	}
+  .explore {
+    width: 200px;
+    height: 300px;
+  }
 }
 
 
 @media only screen and (max-width: 480px) {
-	.poster {
-		width: 180px;
-	}
+  .poster {
+    width: 180px;
+  }
 
-	.explore {
-		width: 180px;
-		height: 270px;
-	}
+  .explore {
+    width: 180px;
+    height: 270px;
+  }
 
 }

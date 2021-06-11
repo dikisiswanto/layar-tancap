@@ -1,21 +1,21 @@
 a.link {
-	display: inline-block;
-	background-color: #202125;
-	color: #fff;
-	padding: 15px 20px;
-	text-decoration: none;
-	margin: 30px 0 0;
-	margin-left: 50px;
+  display: inline-block;
+  background-color: #202125;
+  color: #fff;
+  padding: 15px 20px;
+  text-decoration: none;
+  margin: 30px 0 0;
+  margin-left: 50px;
 }
 
 @media only screen and (max-width: 1024px) {
-	a.link {
-		margin-left: 30px;
-	}
+  a.link {
+    margin-left: 30px;
+  }
 }
 
 @media only screen and (max-width: 640px) {
-	a.link {
-		margin-left: 20px;
-	}
+  a.link {
+    margin-left: 20px;
+  }
 }

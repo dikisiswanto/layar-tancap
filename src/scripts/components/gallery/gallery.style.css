@@ -1,75 +1,75 @@
 .movies {
-	display: flex;
-	flex-wrap: wrap;
-	padding: 0 50px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 50px;
 }
 
 .movies > poster-item {
-	width: 16.666%;
+  width: 16.666%;
 }
 
 .gallery {
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-	overflow: hidden;
-	overflow-x: scroll;
-	white-space: nowrap;
-	scroll-snap-type: x mandatory;
-	scroll-padding: 50px;
-	-ms-overflow-style: none;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  overflow: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
+  scroll-snap-type: x mandatory;
+  scroll-padding: 50px;
+  -ms-overflow-style: none;
 }
 
 .gallery::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .gallery .pad {
-	flex-shrink: 0;
-	width: 50px;
+  flex-shrink: 0;
+  width: 50px;
 }
 
 @media only screen and (max-width: 1500px) {
-	.movies > poster-item {
-		width: 20%;
-	}
+  .movies > poster-item {
+    width: 20%;
+  }
 }
 
 @media only screen and (max-width: 1024px) {
-	.gallery {
-		scroll-padding: 30px;
-	}
+  .gallery {
+    scroll-padding: 30px;
+  }
 
-	.gallery .pad {
-		width: 30px;
-	}
+  .gallery .pad {
+    width: 30px;
+  }
 
-	.movies {
-		padding: 0 30px;
-	}
+  .movies {
+    padding: 0 30px;
+  }
 
 }
 
 @media only screen and (max-width: 640px) {
-	.gallery {
-		scroll-padding: 20px;
-	}
+  .gallery {
+    scroll-padding: 20px;
+  }
 
-	.gallery .pad {
-		width: 20px;
-	}
+  .gallery .pad {
+    width: 20px;
+  }
 
-	.movies {
-		padding:  0 20px;
-	}
+  .movies {
+    padding:  0 20px;
+  }
 
-	.movies > poster-item {
-		width: 33.333333%;
-	}
+  .movies > poster-item {
+    width: 33.333333%;
+  }
 }
 @media only screen and (max-width: 480px) {
-	.movies > poster-item {
-		width: 50%;
-	}
+  .movies > poster-item {
+    width: 50%;
+  }
 }

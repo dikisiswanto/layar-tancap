@@ -1,23 +1,23 @@
 .title-section {
-	display: flex;
-	flex-direction: row;
-	align-items: flex-end;
-	margin: 50px 0 20px 50px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  margin: 50px 0 20px 50px;
 }
 
 .title-section h3 {
-	margin-right: 10px;
-	font-size: 1.6em;
+  margin-right: 10px;
+  font-size: 1.6em;
 }
 
 @media only screen and (max-width: 1024px) {
-	.title-section {
-		margin: 50px 0 20px 30px;
-	}
+  .title-section {
+    margin: 50px 0 20px 30px;
+  }
 }
 
 @media only screen and (max-width: 640px) {
-	.title-section {
-		margin: 50px 0 20px 20px;
-	}
+  .title-section {
+    margin: 50px 0 20px 20px;
+  }
 }
