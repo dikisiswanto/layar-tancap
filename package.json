@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@vaadin/router": "^1.7.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "regenerator-runtime": "^0.13.5"
   }
 }
